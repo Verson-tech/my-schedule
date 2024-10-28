@@ -327,8 +327,9 @@
         const contentSection = document.getElementById("contentSection");
         const errorMessage = document.getElementById("errorMessage");
         const loginSection = document.getElementById("loginSection");
+        const expression = (1000 + 200 + 30 + 4).toString();
 
-        if (password === "1234") {
+        if (password === expression) {
           document.body.style.backgroundColor = "white";
           contentSection.style.display = "block";
           loginSection.style.display = "none";
