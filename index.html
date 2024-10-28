@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 20px;
+        min-height: 100vh;
+        background-image: url("DSC02714.jpg");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #loginSection {
+        background-color: rgba(237, 217, 202, 0.4);
+        z-index: 1;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-top: 50px;
+        text-align: center;
+      }
+
+      #contentSection {
+        display: none;
+        background-color: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin: 20px;
+        max-width: 1000px;
+        width: 95%;
+      }
+
+      input {
+        padding: 8px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        width: 200px;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      .error {
+        color: red;
+        margin-top: 10px;
+        display: none;
+      }
+
+      h1,
+      h2 {
+        color: #333;
+        border-bottom: 2px solid #4caf50;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+      }
+
+      .week-container {
+        margin-bottom: 30px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+      }
+
+      .day-schedule {
+        background-color: #f9f9f9;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 6px;
+        border-left: 4px solid #4caf50;
+      }
+
+      .time-slot {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .time-slot:last-child {
+        border-bottom: none;
+      }
+
+      .time {
+        font-weight: bold;
+        color: #666;
+        min-width: 180px;
+      }
+
+      .activity {
+        flex-grow: 1;
+        padding-left: 20px;
+        color: #333;
+      }
+
+      .progress {
+        color: #4caf50;
+        font-style: italic;
+      }
+
+      .summary-section {
+        background-color: #f5f5f5;
+        padding: 20px;
+        border-radius: 8px;
+        margin-top: 20px;
+      }
+
+      .summary-item {
+        margin: 10px 0;
+        color: #666;
+      }
+
+      .tab-container {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .tab {
+        padding: 10px 20px;
+        background-color: #eee;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .tab.active {
+        background-color: #4caf50;
+        color: white;
+      }
+
+      .content-section {
+        display: none;
+      }
+
+      .content-section.active {
+        display: block;
+      }
+
+      .materials-list {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .materials-list li {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loginSection">
+      <h2>Enter Password to View Schedule</h2>
+      <input type="password" id="passwordInput" placeholder="Enter password" />
+      <button onclick="checkPassword()">Submit</button>
+      <p id="errorMessage" class="error">Incorrect password! Try again.</p>
+    </div>
+
+    <div id="contentSection">
+      <h1>Comprehensive Photography Study Schedule (8-Hour Days)</h1>
+
+      <div class="tab-container">
+        <button class="tab active" onclick="showContent('schedule')">
+          Schedule
+        </button>
+        <button class="tab" onclick="showContent('summary')">Summary</button>
+        <button class="tab" onclick="showContent('materials')">
+          Materials
+        </button>
+      </div>
+
+      <div id="scheduleContent" class="content-section active">
+        <div class="week-container">
+          <h2>Week 1: October 29 - November 1, 2024</h2>
+          <div class="day-schedule">
+            <h3>Tuesday, October 29</h3>
+            <div class="time-slot">
+              <span class="time">9:00 AM - 9:45 AM</span>
+              <span class="activity"
+                >Book Study: Camera Basics & Setup (Pages 1-30)</span
+              >
+            </div>
+            <div class="time-slot">
+              <span class="time">9:45 AM - 12:30 PM</span>
+              <span class="activity"
+                >Photography Masterclass Morning Session</span
+              >
+            </div>
+            <div class="time-slot">
+              <span class="time">12:30 PM - 1:15 PM</span>
+              <span class="activity">Lunch Break</span>
+            </div>
+            <div class="time-slot">
+              <span class="time">1:15 PM - 4:15 PM</span>
+              <span class="activity"
+                >Photography Masterclass Afternoon Session</span
+              >
+            </div>
+            <div class="time-slot">
+              <span class="time">4:15 PM - 5:00 PM</span>
+              <span class="activity"
+                >Hands-on Camera Practice (Basic Operations)</span
+              >
+            </div>
+            <div class="progress">
+              Daily Progress: 6 hours of Masterclass completed
+            </div>
+          </div>
+          <!-- Additional days follow same pattern -->
+          <div class="day-schedule">
+            <h3>Wednesday, October 30</h3>
+            <div class="time-slot">
+              <span class="time">9:00 AM - 9:45 AM</span>
+              <span class="activity"
+                >Book Study (Pages 31-60) - Shooting Modes</span
+              >
+            </div>
+            <div class="time-slot">
+              <span class="time">9:45 AM - 12:30 PM</span>
+              <span class="activity"
+                >Photography Masterclass Morning Session</span
+              >
+            </div>
+            <div class="time-slot">
+              <span class="time">12:30 PM - 1:15 PM</span>
+              <span class="activity">Lunch Break</span>
+            </div>
+            <div class="time-slot">
+              <span class="time">1:15 PM - 4:15 PM</span>
+              <span class="activity"
+                >Photography Masterclass Afternoon Session</span
+              >
+            </div>
+            <div class="time-slot">
+              <span class="time">4:15 PM - 5:00 PM</span>
+              <span class="activity"
+                >Hands-on Camera Practice (Basic Operations)</span
+              >
+            </div>
+            <div class="progress">
+              Daily Progress: 6 hours of Masterclass completed
+            </div>
+          </div>
+        </div>
+        <!-- Additional days follow same pattern -->
+
+        <div class="week-container">
+          <h2>Week 2: November 4-8, 2024</h2>
+          <!-- Week 2 content -->
+        </div>
+
+        <div class="week-container">
+          <h2>Week 3: November 11-12, 2024</h2>
+          <!-- Week 3 content -->
+        </div>
+      </div>
+
+      <div id="summaryContent" class="content-section">
+        <h2>Schedule Summary</h2>
+        <div class="summary-section">
+          <div class="summary-item">📅 Start Date: October 29, 2024</div>
+          <div class="summary-item">📅 End Date: November 12, 2024</div>
+          <div class="summary-item">⏰ Daily Schedule: 9:00 AM - 5:00 PM</div>
+          <div class="summary-item">📚 Total Program Hours: 80 hours</div>
+          <div class="summary-item">
+            Daily Components:
+            <ul>
+              <li>45 minutes book study</li>
+              <li>45 minutes hands-on practice</li>
+              <li>45 minutes lunch break</li>
+              <li>5.5 hours masterclass (typical day)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div id="materialsContent" class="content-section">
+        <h2>Study Materials</h2>
+        <ul class="materials-list">
+          <li>
+            📷 Udemy course: "Photography Masterclass: Your Complete Guide to
+            Photography" (65 hours)
+            <a
+              href="https://www.udemy.com/course/photography-masterclass-complete-guide-to-photography/learn/lecture/8749438#overview"
+              target="_blank"
+              >Visit Course</a
+            >
+          </li>
+          <li>📚 Photographer's Guide to the Sony DSC-RX100 VI (260 pages)</li>
+          <li>📸 Sony DSC-RX100 VI Camera (for hands-on practice)</li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      function checkPassword() {
+        const password = document.getElementById("passwordInput").value;
+        const contentSection = document.getElementById("contentSection");
+        const errorMessage = document.getElementById("errorMessage");
+        const loginSection = document.getElementById("loginSection");
+
+        if (password === "1234") {
+          document.body.style.backgroundColor = "white";
+          contentSection.style.display = "block";
+          loginSection.style.display = "none";
+          errorMessage.style.display = "none";
+        } else {
+          errorMessage.style.display = "block";
+          document.body.style.backgroundColor = "yellow";
+          contentSection.style.display = "none";
+        }
+      }
+
+      function showContent(contentType) {
+        // Hide all content sections
+        document.querySelectorAll(".content-section").forEach((section) => {
+          section.classList.remove("active");
+        });
+
+        // Remove active class from all tabs
+        document.querySelectorAll(".tab").forEach((tab) => {
+          tab.classList.remove("active");
+        });
+
+        // Show selected content and activate tab
+        document
+          .getElementById(contentType + "Content")
+          .classList.add("active");
+        event.target.classList.add("active");
+      }
+    </script>
+  </body>
+</html>
